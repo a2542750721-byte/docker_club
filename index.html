@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创享网络信息协会 - 官方网站</title>
+    <meta name="description" content="创想网络信息协会官方网站，专注计算机技术交流与学习">
+    <meta name="keywords" content="创想网络,信息协会,计算机,技术交流,编程,学习">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23002FA7'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-family='Arial'>C</text></svg>">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" style="text-decoration: none;">
+                    <h2>创享网络信息协会</h2>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#activities" class="nav-link">活动</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#news" class="nav-link">新闻</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#gallery" class="nav-link">展示</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#resources" class="nav-link">资源</a>
+                </li>
+            </ul>
+            
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+                    <i class="fas fa-sun sun"></i>
+                    <i class="fas fa-moon moon"></i>
+                </button>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="gradient-text">创享网络信息协会</span>
+                </h1>
+                <p class="hero-subtitle">
+                    探索计算机世界的无限可能，与志同道合的伙伴一起成长
+                </p>
+                <div class="hero-buttons">
+                    <a href="#activities" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt"></i> 查看活动
+                    </a>
+                    <a href="#resources" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> 获取资源
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>技术分享</h3>
+                    <p>定期举办技术分享会，交流最新技术动态</p>
+                </div>
+                <div class="hero-card">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>团队协作</h3>
+                    <p>组建项目团队，共同完成有趣的项目</p>
+                </div>
+                <div class="hero-card">
+                    <div class="card-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>竞赛培训</h3>
+                    <p>参与编程竞赛，提升编程技能和思维能力</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg">
+            <div class="bg-circle circle-1"></div>
+            <div class="bg-circle circle-2"></div>
+            <div class="bg-circle circle-3"></div>
+        </div>
+    </section>
+
+    <section id="activities" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">近期活动</h2>
+                <p class="section-subtitle">参与我们的活动，与同学们一起学习成长</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">新闻动态</h2>
+                <p class="section-subtitle">了解协会最新动态和技术资讯</p>
+            </div>
+            <div class="news-grid" id="news-grid">
+                </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">精彩瞬间</h2>
+                <p class="section-subtitle">记录我们的成长足迹和美好时光</p>
+            </div>
+            <div class="gallery-filter">
+                <button class="filter-btn active">全部</button>
+            </div>
+            <div class="gallery-grid" id="gallery-grid">
+                </div>
+        </div>
+    </section>
+
+    <section id="resources" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">学习资源</h2>
+                <p class="section-subtitle">精选优质学习资料，助力技能提升</p>
+            </div>
+            <div class="resources-grid" id="resources-grid">
+                </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section footer-info">
+                    <h3>创享网络信息协会</h3>
+                    <p>探索计算机世界的无限可能，与志同道合的伙伴一起成长</p>
+                    <div class="social-links">
+                        <a href="javascript:void(0)" class="social-link" title="QQ群"><i class="fab fa-qq"></i></a>
+                        <a href="javascript:void(0)" class="social-link" title="微信公众号"><i class="fab fa-weixin"></i></a>
+                        <a href="javascript:void(0)" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <a href="#home" class="footer-btn"><i class="fas fa-home"></i> 首页</a>
+                    <a href="#activities" class="footer-btn"><i class="fas fa-calendar-alt"></i> 活动</a>
+                    <a href="#news" class="footer-btn"><i class="fas fa-newspaper"></i> 新闻</a>
+                    <a href="#resources" class="footer-btn"><i class="fas fa-download"></i> 资源</a>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <p><i class="fas fa-envelope"></i> a2542750721@163.com</p>
+                    <p><i class="fas fa-phone"></i> 18311422016</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 后街创想网络信息协会办公室</p>
+                </div>
+                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 创想网络信息协会. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" onclick="scrollToTop()" aria-label="返回顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 主题切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const root = document.documentElement;
+            
+            // 添加主题切换事件
+            themeToggle.addEventListener('click', function() {
+                root.classList.toggle('dark-mode');
+            });
+            
+            // 返回顶部按钮功能
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.display = 'flex';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+            
+            // 移动端导航菜单切换
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            navToggle.addEventListener('click', function() {
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // 导航链接点击后关闭移动端菜单
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        });
+        
+        // 返回顶部功能
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
