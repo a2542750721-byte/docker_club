@@ -1,0 +1,17 @@
+{
+  "name": "docker-web-dev",
+  "version": "1.0.0",
+  "description": "Docker Web Dev Environment",
+  "main": "index.php",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/tailwind.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2"
+  }
+}

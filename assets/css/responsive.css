@@ -1,0 +1,396 @@
+/* Global Responsive Improvements */
+:root {
+    --nav-height: 70px;
+}
+
+/* Touch Target Optimization (>= 48px) */
+button, 
+a.btn, 
+.nav-link, 
+.footer-btn,
+.social-link,
+.card-actions .btn,
+.theme-toggle,
+.bg-style-btn,
+.nav-toggle,
+input, 
+select, 
+textarea {
+    min-height: 48px;
+    min-width: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Specific adjustment for inline text links to not break flow */
+p a, .content a {
+    min-height: auto;
+    min-width: auto;
+    display: inline;
+    padding: 8px 0; /* Add vertical padding for touch */
+}
+
+/* Responsive Typography */
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 16px; /* 保持 16px 基础字号 */
+    }
+    
+    h1, .hero-title {
+        font-size: 2.8rem !important;
+    }
+    
+    h2, .section-title {
+        font-size: 2.2rem !important;
+    }
+    
+    h3 {
+        font-size: 1.6rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 16px; /* 保持 16px 基础字号 */
+    }
+
+    h1, .hero-title {
+        font-size: 2.2rem !important;
+    }
+    
+    h2, .section-title {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* Unified Grid System (Refactoring inline styles) */
+.unified-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 30px auto;
+    max-width: 1300px;
+    padding: 0 20px;
+}
+
+/* Standard Card (Refactoring inline styles) */
+.standard-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border: none;
+    transition: all 0.3s ease;
+    width: 100%; /* Fluid width */
+    max-width: 100%;
+}
+
+.dark-mode .standard-card {
+    background: #2d2d2d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.standard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.standard-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background: conic-gradient(from 0deg, transparent, var(--klein-blue), transparent);
+    z-index: -1;
+    border-radius: 18px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    animation: rotate 4s linear infinite;
+    pointer-events: none;
+}
+
+.standard-card:hover::before {
+    opacity: 1;
+}
+
+/* Standard Image Box */
+.standard-img-box {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    position: relative;
+    background: #f8f8f8;
+    overflow: hidden;
+}
+
+.standard-img-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Standard Body */
+.standard-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.standard-body h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.dark-mode .standard-body h3 {
+    color: #fff;
+}
+
+.standard-body p {
+    color: var(--text-primary); /* 使用主文字颜色提升对比度 */
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.dark-mode .standard-body p {
+    color: var(--text-primary);
+    font-weight: 450;
+}
+
+/* Hero Section Responsiveness */
+.hero {
+    min-height: 100vh; /* Fallback */
+    min-height: 100dvh; /* Dynamic Viewport Height */
+    padding-top: var(--nav-height);
+}
+
+.hero-content {
+    padding: 20px;
+    width: 100%;
+}
+
+.hero-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.hero-card-container > div {
+    flex: 1 1 300px; /* Grow, shrink, basis */
+    max-width: 400px;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--nav-height));
+        background: var(--bg-primary);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        gap: 2rem;
+        box-shadow: none; /* Removed shadow for cleaner look */
+        padding-bottom: 2rem;
+    }
+
+    .dark-mode .nav-menu {
+        background: var(--dark-gray);
+    }
+
+    .nav-menu.active {
+        transform: translateX(0);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .nav-item {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 15px;
+        display: block;
+        width: 100%;
+    }
+
+    .nav-toggle {
+        display: flex;
+        z-index: 1001;
+    }
+    
+    /* Ensure modal overlays are above everything */
+    .modal {
+        z-index: 2000;
+    }
+}
+
+/* Form Elements Optimization for Mobile */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Hide hover effects on touch devices to prevent sticky states */
+@media (hover: none) {
+    .standard-card:hover {
+        transform: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Modal Responsiveness */
+.modal-content {
+    width: 95%;
+    margin: 20px auto;
+    max-height: 90vh;
+    padding: 20px;
+}
+
+.modal-close {
+    padding: 10px; /* Touch target */
+}
+
+/* Utilities */
+.hidden-mobile {
+    display: none !important;
+}
+
+@media (min-width: 769px) {
+    .hidden-mobile {
+        display: block !important;
+    }
+    .hidden-desktop {
+        display: none !important;
+    }
+}
+
+/* Admin Dashboard Styles */
+.admin-dashboard {
+    background: var(--bg-secondary);
+}
+
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    padding: 2rem;
+    text-align: center;
+    border-radius: 12px;
+    background: var(--bg-primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.stat-card h3 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.admin-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.admin-buttons .btn {
+    flex: 1 1 200px; /* Grow, shrink, basis */
+    max-width: 300px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Modal form inputs in admin */
+.form-input, .form-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 16px;
+}
+
+.preview-box {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+    background: #eee;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 2px dashed #ccc;
+    overflow: hidden;
+}
+
+.preview-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.manage-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+

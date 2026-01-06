@@ -1,39 +1,155 @@
-<?php require_once __DIR__  . '/config/db.php'; ?>
-<?php require_once __DIR__ . '/includes/functions.php';?>
-<?php include __DIR__ . '/includes/header.php'; ?>
+<?php
+$current_script = basename($_SERVER['SCRIPT_NAME']);
+require_once __DIR__  . '/config/db.php';
+require_once __DIR__ . '/includes/functions.php';
+?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创享网络信息协会 - 官方网站</title>
+    <meta name="description" content="创想网络信息协会官方网站，专注计算机技术交流与学习">
+    <meta name="keywords" content="创想网络,信息协会,计算机,技术交流,编程,学习">
+    <link rel="stylesheet" href="assets/css/styles.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/ai_ide.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/ai_monitor.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=<?php echo time(); ?>">
+    <script src="assets/js/utils.js?v=<?php echo time(); ?>"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        // Apply theme before page renders to prevent FOUC
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            if (savedTheme) {
+                if (savedTheme === 'dark-mode') document.documentElement.classList.add('dark-mode');
+            } else if (prefersDarkScheme.matches) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <?php include __DIR__ . '/includes/background_manager.php'; ?>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" id="logo-text" style="text-decoration: none; cursor: pointer;">
+                    <h2>创享网络信息协会</h2>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link active">首页</a></li>
+                <li class="nav-item"><a href="#activities" class="nav-link">活动</a></li>
+                <li class="nav-item"><a href="#resources" class="nav-link">资源</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+                    <i class="fas fa-sun sun"></i>
+                    <i class="fas fa-moon moon"></i>
+                </button>
+                <button id="bg-style-toggle" class="bg-style-btn" title="切换背景风格">
+                    <i class="fas fa-braille"></i>
+                </button>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="gradient-text">创享网络信息协会</span>
+                </h1>
+                <p class="hero-subtitle">探索计算机世界的无限可能，与志同道合的伙伴一起成长</p>
+                <div class="hero-buttons">
+                    <a href="#activities" class="btn btn-primary"><i class="fas fa-calendar-alt"></i> 查看活动</a>
+                    <a href="#resources" class="btn btn-secondary"><i class="fas fa-download"></i> 获取资源</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card-container gap-6"> 
+                    <div class="group flex-1 min-w-[280px]" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-full p-8 bg-white dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-500/50 dark:hover:border-blue-400/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl mb-6 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">技术分享</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">定期举办技术分享会，交流最新技术动态，探索前沿科技。</p>
+                            <a href="#activities" class="inline-flex items-center text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                了解更多 <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="group flex-1 min-w-[280px]" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-full p-8 bg-white dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-purple-500/50 dark:hover:border-purple-400/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-lg bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl mb-6 transition-colors group-hover:bg-purple-600 group-hover:text-white">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">团队协作</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">组建跨学科项目团队，共同攻克难关，完成有趣且富有挑战的项目。</p>
+                            <a href="#activities" class="inline-flex items-center text-sm font-medium text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                                加入团队 <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="group flex-1 min-w-[280px]" data-aos="fade-up" data-aos-delay="300">
+                        <div class="h-full p-8 bg-white dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-amber-500/50 dark:hover:border-amber-400/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-lg bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400 text-xl mb-6 transition-colors group-hover:bg-amber-600 group-hover:text-white">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">竞赛培训</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">系统化参与ACM、蓝桥杯等编程竞赛，全方位提升算法思维与实战能力。</p>
+                            <a href="#activities" class="inline-flex items-center text-sm font-medium text-gray-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+                                查看战绩 <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg">
+            <div class="bg-circle circle-1"></div>
+            <div class="bg-circle circle-2"></div>
+            <div class="bg-circle circle-3"></div>
+        </div>
+    </section>
+
+    <script src="assets/js/liquid-glass.js"></script>
+    <script>
+        document.querySelectorAll('.liquid-glass-trigger').forEach(el => { new LiquidGlassElement(el); });
+    </script>
 
     <section id="activities" class="section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">近期活动</h2>
-                <p class="section-subtitle">参与我们的活动，与同学们一起学习成长</p>
             </div>
-
-            <div class="news-grid"> 
+            <div class="unified-grid"> 
                 <?php
-                $result = $conn->query("SELECT * FROM activities ORDER BY created_at DESC LIMIT 3");
-                while($row = $result->fetch_assoc()): ?>
-                    <div class="card flat-card">
-                        <div style="width:100%; height:200px; overflow:hidden; border-radius: 8px 8px 0 0;">
-                            <img src="<?php echo $row['cover']; ?>" 
-                                 style="width:100%; height:100%; object-fit:cover; transition: transform 0.3s ease;" 
-                                 onmouseover="this.style.transform='scale(1.05)'" 
-                                 onmouseout="this.style.transform='scale(1)'">
-                        </div>
-                        
-                        <div class="card-body" style="padding:20px; display: flex; flex-direction: column; height: 180px;">
-                            <h3 style="margin: 0 0 10px; font-size: 1.25rem; height: 1.5em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-                                <?php echo htmlspecialchars($row['title']); ?>
-                            </h3>
-                            <p style="color: #666; font-size: 0.95rem; line-height: 1.5; height: 4.5em; overflow: hidden; margin-bottom: 15px;">
-                                <?php echo mb_substr(strip_tags($row['content']), 0, 60); ?>...
-                            </p>
-                            <div style="margin-top: auto;">
-                                <button class="btn btn-primary" style="width: 100%;" onclick="openFullArticle(<?php echo $row['id']; ?>)">查看详情</button>
+                if(isset($conn) && $conn) {
+                    $result = $conn->query("SELECT * FROM activities ORDER BY created_at DESC LIMIT 3");
+                    if($result) {
+                        while($row = $result->fetch_assoc()): ?>
+                            <div class="card standard-card">
+                                <div class="standard-img-box">
+                                    <img src="<?php echo htmlspecialchars($row['cover'] ?: 'assets/images/default.jpg'); ?>" crossorigin="anonymous" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22800%22%20height%3D%22400%22%20viewBox%3D%220%200%20800%20400%22%20fill%3D%22%23f0f0f0%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2224%22%20fill%3D%22%23aaa%22%3E%E6%9A%82%E6%97%A0%E5%B0%81%E9%9D%A2%3C%2Ftext%3E%3C%2Fsvg%3E'; this.onerror=null;">
+                                </div>
+                                <div class="standard-body">
+                                    <h3><?php echo htmlspecialchars($row['title']); ?></h3>
+                                    <p><?php echo mb_substr(strip_tags($row['content']), 0, 50); ?>...</p>
+                                    <button class="btn btn-primary" onclick="safeCall('openFullArticle', <?php echo $row['id']; ?>)">查看活动详情</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
+                        <?php endwhile; 
+                    }
+                } ?>
             </div>
         </div>
     </section>
@@ -42,134 +158,35 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">学习资源</h2>
-                <p class="section-subtitle">精选优质学习资料，助力技能提升</p>
             </div>
-            <div class="resources-grid">
+            <div class="unified-grid">
                 <?php
-                $res = $conn->query("SELECT * FROM resources ORDER BY created_at DESC LIMIT 4");
-                while($row = $res->fetch_assoc()): ?>
-                    <div class="card" style="padding:25px; background:var(--card-bg); border-radius:12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
-                        <h4 style="margin-top: 0; color: var(--klein-blue); font-size: 1.15rem;"><?php echo htmlspecialchars($row['title']); ?></h4>
-                        <p style="font-size: 0.9rem; color: #555; margin: 10px 0 20px;"><?php echo htmlspecialchars($row['content']); ?></p>
-                        <a href="<?php echo $row['link']; ?>" target="_blank" class="btn btn-outline" style="display: block; text-align: center;">立即获取</a>
-                    </div>
-                <?php endwhile; ?>
+                if(isset($conn) && $conn) {
+                    $res = $conn->query("SELECT * FROM resources ORDER BY created_at DESC LIMIT 3");
+                    if($res) {
+                        while($row = $res->fetch_assoc()): ?>
+                            <div class="card standard-card">
+                                <div class="standard-img-box">
+                                    <img src="<?php echo htmlspecialchars($row['cover'] ?: 'assets/images/default.jpg'); ?>" crossorigin="anonymous" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22800%22%20height%3D%22400%22%20viewBox%3D%220%200%20800%20400%22%20fill%3D%22%23f0f0f0%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2224%22%20fill%3D%22%23aaa%22%3E%E6%9A%82%E6%97%A0%E5%B0%81%E9%9D%A2%3C%2Ftext%3E%3C%2Fsvg%3E'; this.onerror=null;">
+                                </div>
+                                <div class="standard-body">
+                                    <h3><?php echo htmlspecialchars($row['title']); ?></h3>
+                                    <p><?php echo mb_substr(strip_tags($row['content']), 0, 50); ?>...</p>
+                                    <div style="display:flex; gap:10px;">
+                                        <button class="btn btn-outline" style="flex:1" onclick="safeCall('openFullArticle', <?php echo $row['id']; ?>)">详情</button>
+                                        <a href="<?php echo htmlspecialchars($row['link']); ?>" target="_blank" class="btn btn-primary" style="flex:1; text-align:center;">下载资源</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endwhile;
+                    }
+                } ?>
             </div>
         </div>
     </section>
 
-<?php include __DIR__ . '/includes/modals.php'; ?>
-<?php include __DIR__ . '/includes/footer.php'; ?>
-
-<script>
-// 定义打开函数
-function openFullArticle(id) {
-    console.log("启动动态弹窗，文章ID:", id);
-
-    let existingModal = document.getElementById('dynamic-article-modal');
-    if (existingModal) {
-        existingModal.remove();
-    }
-
-    const modal = document.createElement('div');
-    modal.id = 'dynamic-article-modal';
-    
-    Object.assign(modal.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        zIndex: '2147483647',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backdropFilter: 'blur(5px)',
-        opacity: '0',
-        transition: 'opacity 0.3s ease'
-    });
-
-    const card = document.createElement('div');
-    Object.assign(card.style, {
-        background: '#fff',
-        width: '90%',
-        maxWidth: '750px',
-        maxHeight: '85vh',
-        borderRadius: '16px',
-        padding: '0', // 改为 0，因为标题和图片需要自定义间距
-        position: 'relative',
-        overflowY: 'auto',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
-        transform: 'scale(0.95)',
-        transition: 'transform 0.3s ease'
-    });
-
-    card.innerHTML = `
-        <button onclick="closeDynamicModal()" style="position:fixed; top:20px; right:20px; background:rgba(255,255,255,0.2); border:none; font-size:32px; cursor:pointer; color:#fff; width:45px; height:45px; border-radius:50%; line-height:45px; text-align:center; z-index:10;">&times;</button>
-        <div id="dynamic-content" style="padding:40px; color:#333;">
-            <div style="text-align:center;">
-                <h3 style="margin-bottom:10px;">🔄 正在获取内容...</h3>
-            </div>
-        </div>
-    `;
-
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-
-    requestAnimationFrame(() => {
-        modal.style.opacity = '1';
-        card.style.transform = 'scale(1)';
-    });
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeDynamicModal();
-    });
-
-    fetch('get_detail.php?id=' + id)
-        .then(res => res.text())
-        .then(text => {
-            const contentBox = document.getElementById('dynamic-content');
-            try {
-                const data = JSON.parse(text);
-                
-                // 详情页图片建议使用 contain 模式，避免裁剪关键信息，但在列表中必须用 cover
-                let coverHtml = data.cover ? 
-                    `<div style="text-align:center; background:#f8f9fa; border-radius:12px; margin: 20px 0; padding:10px;">
-                        <img src="${data.cover}" style="max-width:100%; max-height:400px; object-fit:contain; border-radius: 8px;">
-                     </div>` : '';
-
-                contentBox.innerHTML = `
-                    <div style="text-align:left; line-height:1.8;">
-                        <h1 style="color:#002FA7; margin-top:0; font-size: 2rem; border-bottom:2px solid #f0f0f0; padding-bottom:20px;">${data.title}</h1>
-                        <div style="font-size:14px; color:#999; margin:15px 0; display: flex; align-items: center; gap: 10px;">
-                            <span>📅 发布时间：${data.created_at || '未知'}</span>
-                            <span style="background: #eef2ff; color: #002FA7; padding: 2px 8px; border-radius: 4px;">活动详情</span>
-                        </div>
-                        ${coverHtml}
-                        <div style="font-size:17px; color:#444; margin-top: 25px;">
-                            ${data.content}
-                        </div>
-                    </div>
-                `;
-            } catch (e) {
-                contentBox.innerHTML = `<p style="color:red; text-align:center;">数据解析错误</p>`;
-            }
-        })
-        .catch(err => {
-            document.getElementById('dynamic-content').innerHTML = `<p style="color:red; text-align:center;">网络请求失败</p>`;
-        });
-}
-
-function closeDynamicModal() {
-    const modal = document.getElementById('dynamic-article-modal');
-    if (modal) {
-        modal.style.opacity = '0';
-        setTimeout(() => {
-            modal.remove();
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-}
-</script>
+    <?php include __DIR__ . '/includes/modals.php'; ?>
+    <?php include __DIR__ . '/includes/footer.php'; ?>
+    <?php include __DIR__ . '/includes/toolbox.php'; ?>
+</body>
+</html>

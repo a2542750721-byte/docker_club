@@ -31,9 +31,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理员登录 - 创享网络信息协会</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23002FA7'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-family='Arial'>C</text></svg>">
+    <script>
+        // Apply theme before page renders to prevent FOUC
+        (function() {
+            // Check for saved theme in localStorage
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Apply theme: prioritize user selection, fallback to system preference
+            if (savedTheme) {
+                if (savedTheme === 'dark-mode') {
+                    document.documentElement.classList.add('dark-mode');
+                }
+            } else if (prefersDarkScheme.matches) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
 </head>
 <body>
     <div class="login-container">

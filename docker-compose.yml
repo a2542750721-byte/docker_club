@@ -23,12 +23,11 @@ services:
 
   db:
     image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password --performance_schema=OFF
     environment:
       MYSQL_ROOT_PASSWORD: '000000'
       MYSQL_DATABASE: club_db
     volumes:
       - db_data:/var/lib/mysql
-
 volumes:
   db_data:

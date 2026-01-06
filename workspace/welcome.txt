@@ -1,0 +1,4 @@
+Welcome to your new Online IDE!
+This file is stored in the 'workspace' directory.
+You can create, edit, and save files here.
+Happy coding!

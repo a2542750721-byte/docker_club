@@ -6,9 +6,18 @@ $s_p = getenv('DB_PASS') ?: '000000'; // 数据库密码
 $s_d = getenv('DB_NAME') ?: 'club_db';  // 数据库名
 
 mysqli_report(MYSQLI_REPORT_OFF); 
-$conn = new mysqli($s_h, $s_u, $s_p, $s_d);
+$conn = @new mysqli($s_h, $s_u, $s_p, $s_d);
 //检查连接状态
 if ($conn->connect_error) {
+    // 确保返回 JSON 错误而不是纯文本，以免破坏前端解析
+    if (defined('DOING_AJAX') || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false)) {
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => false,
+            'message' => "Database Connection Failed: " . $conn->connect_error . " (Host: $s_h)"
+        ]);
+        exit;
+    }
     die("数据库连接失败，请检查容器状态: " . $conn->connect_error);
 }
 
@@ -39,7 +48,64 @@ $t_passwd = "CREATE TABLE IF NOT EXISTS admins (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
+// --- 竞赛相关表自动初始化 ---
+$t_comp_questions = "CREATE TABLE IF NOT EXISTS competition_questions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    question_text TEXT NOT NULL,
+    options JSON,
+    correct_option INT,
+    type VARCHAR(20) DEFAULT 'choice',
+    answer_key VARCHAR(255) DEFAULT '',
+    category VARCHAR(50) DEFAULT 'Python',
+    difficulty VARCHAR(20) DEFAULT 'medium',
+    tags VARCHAR(255) DEFAULT '',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+
+$t_comp_progress = "CREATE TABLE IF NOT EXISTS practice_progress (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    question_id INT NOT NULL,
+    is_correct TINYINT(1) DEFAULT 0,
+    is_marked TINYINT(1) DEFAULT 0,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY user_question (username, question_id)
+)";
+
+$t_comp_results = "CREATE TABLE IF NOT EXISTS competition_results (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    score INT NOT NULL,
+    total_questions INT NOT NULL,
+    time_taken INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+
 $conn->query($t_activities);
 $conn->query($t_resources);
 $conn->query($t_passwd);
+$conn->query($t_comp_questions);
+$conn->query($t_comp_progress);
+$conn->query($t_comp_results);
+
+$t_typing_scores = "CREATE TABLE IF NOT EXISTS typing_scores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(20) NOT NULL,
+    wpm INT NOT NULL,
+    accuracy INT NOT NULL,
+    satisfaction TINYINT DEFAULT 5,
+    mode VARCHAR(10) DEFAULT 'english',
+    ip_address VARCHAR(45),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+$conn->query($t_typing_scores);
+
+// 检查并自动升级 competition_questions 表结构 (添加新字段)
+$check_cols = $conn->query("SHOW COLUMNS FROM competition_questions LIKE 'difficulty'");
+if ($check_cols && $check_cols->num_rows == 0) {
+    $conn->query("ALTER TABLE competition_questions ADD COLUMN difficulty VARCHAR(20) DEFAULT 'medium'");
+    $conn->query("ALTER TABLE competition_questions ADD COLUMN tags VARCHAR(255) DEFAULT ''");
+    $conn->query("ALTER TABLE competition_questions ADD COLUMN type VARCHAR(20) DEFAULT 'choice'");
+    $conn->query("ALTER TABLE competition_questions ADD COLUMN answer_key VARCHAR(255) DEFAULT ''");
+}
 
