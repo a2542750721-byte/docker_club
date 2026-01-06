@@ -1884,3 +1884,29 @@ html.dark-mode .modal-content {
     background: none;
     color: #999;
 }
+.card-image-container {
+    width: 100%;
+    height: 200px; /* 固定高度 */
+    overflow: hidden; /* 超出部分隐藏 */
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 核心代码：图片会自动居中裁剪，不会拉伸变形 */
+    transition: transform 0.3s ease;
+}
+
+.card-image-container img:hover {
+    transform: scale(1.05); /* 鼠标悬停微放大效果 */
+}
+.detail-content img {
+    max-width: 100%; /* 防止横向撑破容器 */
+    max-height: 500px; /* 强制限制最高高度 */
+    display: block;
+    margin: 1rem auto; /* 居中显示 */
+    object-fit: contain; /* 保证原图比例完整显示，不裁剪，但限制范围 */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
